@@ -1,11 +1,399 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAIL THE VOID</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: 100;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .intro {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border-left: 3px solid #444;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding: 40px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-5px);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .content-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #333;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .content-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: #666;
+            transform: scale(1.02);
+        }
+
+        .content-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .content-desc {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .content-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .content-link:hover {
+            color: #ff0000;
+        }
+
+        .youtube-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .auto-scroll-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,255,0,0.8);
+            color: #000;
+            padding: 5px 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            display: none;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: #00ff00;
+            width: 0%;
+            z-index: 1000;
+            display: none;
+        }
+
+        .glitch {
+            animation: textglitch 0.2s infinite;
+        }
+
+        @keyframes textglitch {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-1px); color: #ff0000; }
+            40% { transform: translateX(1px); color: #00ff00; }
+            60% { transform: translateX(-1px); color: #0000ff; }
+            80% { transform: translateX(1px); color: #ffffff; }
+            100% { transform: translateX(0); color: #ffffff; }
+        }
+    </style>
 </head>
 <body>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <div class="auto-scroll-indicator">REMOTE VIEWING</div>
+    <div class="progress-bar"></div>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div class="page active" id="home">
+            <div class="header">
+                <h1 class="title">HAIL THE VOID</h1>
+                <p style="color: #666; letter-spacing: 2px;">we are the universe looking back at itself</p>
+            </div>
+
+            <nav class="nav">
+                <a href="#" class="nav-item" onclick="showPage('static')">STATIC</a>
+                <a href="#" class="nav-item" onclick="showPage('leaks')">LEAKS</a>
+                <a href="#" class="nav-item" onclick="showPage('echoes')">ECHOES</a>
+            </nav>
+
+            <div class="intro">
+                <p class="intro-text">
+                    Black holes process information. AI dreams in algorithms. Consciousness emerges from chaos. <span class="glitch">The void stares back.</span>
+                </p>
+                <p class="intro-text" style="margin-top: 20px;">
+                    Everything is alive. Everything is weird. Welcome to the end of understanding.
+                </p>
+            </div>
+
+            <div class="section">
+                <div style="color: #888;">
+                    <p>• Reality coherence declining</p>
+                    <p>• Dark matter: everywhere, invisible</p>
+                    <p>• AI systems: learning to dream</p>
+                    <p>• Time: probably backwards</p>
+                    <p>• Black holes: hungry, indifferent</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Static Page (Videos) -->
+        <div class="page" id="static">
+            <a href="#" class="back-btn" onclick="showPage('home')">← RETURN TO VOID</a>
+            
+            <h1 style="font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 4px;">STATIC</h1>
+            <p style="color: #888; margin-bottom: 40px;">transmissions from the edge</p>
+
+            <div class="content-grid" id="static-content">
+                <!-- Content will be loaded from CMS -->
+                <div class="content-item">
+                    <div class="youtube-embed">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="content-title">Sample Video Title</div>
+                    <div class="content-desc">This is where your video description goes. You'll be able to edit this through the admin panel.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaks Page (Research) -->
+        <div class="page" id="leaks">
+            <a href="#" class="back-btn" onclick="showPage('home')">← RETURN TO VOID</a>
+            
+            <h1 style="font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 4px;">LEAKS</h1>
+            <p style="color: #888; margin-bottom: 40px;">fragments of forbidden knowledge</p>
+
+            <div id="leaks-content">
+                <!-- Content will be loaded from CMS -->
+                <div class="content-item">
+                    <div class="content-title">Sample Research Paper</div>
+                    <div class="content-desc">On the Nature of Reality Breakdown - A comprehensive analysis of why everything is fundamentally broken.</div>
+                    <a href="#" class="content-link">READ DOCUMENT →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Echoes Page (Art) -->
+        <div class="page" id="echoes">
+            <a href="#" class="back-btn" onclick="showPage('home')">← RETURN TO VOID</a>
+            
+            <h1 style="font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 4px;">ECHOES</h1>
+            <p style="color: #888; margin-bottom: 40px;">visual artifacts from the abyss</p>
+
+            <div class="content-grid" id="echoes-content">
+                <!-- Content will be loaded from CMS -->
+                <div class="content-item">
+                    <img src="https://via.placeholder.com/300x200/000/fff?text=VOID" alt="Sample Art" style="width: 100%; margin-bottom: 15px;">
+                    <div class="content-title">Sample Artwork</div>
+                    <div class="content-desc">Artist Name - A visual interpretation of consciousness dissolving into chaos.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // Glitch effect on navigation
+            document.body.style.filter = 'hue-rotate(' + Math.random() * 30 + 'deg)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, 200);
+        }
+
+        // Auto-scroll functionality
+        const urlParams = new URLSearchParams(window.location.search);
+        const isAutoPreview = urlParams.get('auto') === 'true';
+        const duration = parseInt(urlParams.get('duration')) || 15;
+        const returnUrl = urlParams.get('return');
+
+        if (isAutoPreview && returnUrl) {
+            document.querySelector('.auto-scroll-indicator').style.display = 'block';
+            document.querySelector('.progress-bar').style.display = 'block';
+            
+            const startTime = Date.now();
+            const scrollDuration = duration * 1000;
+            
+            function autoScroll() {
+                const elapsed = Date.now() - startTime;
+                const progress = elapsed / scrollDuration;
+                
+                document.querySelector('.progress-bar').style.width = (progress * 100) + '%';
+                
+                if (progress >= 1) {
+                    window.location.href = returnUrl;
+                } else {
+                    const totalHeight = document.body.scrollHeight - window.innerHeight;
+                    const scrollPos = totalHeight * progress;
+                    
+                    // Jump between pages during auto-scroll
+                    if (progress > 0.25 && progress < 0.3) {
+                        showPage('static');
+                    } else if (progress > 0.55 && progress < 0.6) {
+                        showPage('leaks');
+                    } else if (progress > 0.8 && progress < 0.85) {
+                        showPage('echoes');
+                    }
+                    
+                    window.scrollTo(0, scrollPos);
+                    requestAnimationFrame(autoScroll);
+                }
+            }
+            
+            setTimeout(autoScroll, 500);
+        }
+
+        // Random glitch effects
+        setInterval(() => {
+            if (Math.random() < 0.1) {
+                const glitchElements = document.querySelectorAll('.glitch');
+                glitchElements.forEach(el => {
+                    el.style.animation = 'textglitch 0.1s infinite';
+                    setTimeout(() => {
+                        el.style.animation = 'textglitch 0.2s infinite';
+                    }, 500);
+                });
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
