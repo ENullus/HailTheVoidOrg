@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>what is this</title>
+    <title>HAIL THE VOID</title>
     <style>
         * {
             margin: 0;
@@ -15,180 +15,183 @@
             background: #000;
             color: #fff;
             font-family: 'Courier New', monospace;
+            line-height: 1.6;
             overflow-x: hidden;
-            cursor: none;
         }
 
-        .cursor {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #fff;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-        }
-
-        .section {
-            min-height: 100vh;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
             padding: 20px;
-            position: relative;
         }
 
-        .section-1 {
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            margin-bottom: 40px;
         }
 
         .title {
-            font-size: 8rem;
+            font-size: 4rem;
             font-weight: 100;
-            letter-spacing: 20px;
-            animation: flicker 0.1s infinite;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            animation: flicker 4s infinite;
         }
 
         @keyframes flicker {
-            0% { opacity: 1; }
+            0%, 100% { opacity: 1; }
             50% { opacity: 0.8; }
-            100% { opacity: 1; }
         }
 
-        .section-2 {
-            background: #ffffff;
-            color: #000;
-            font-family: Times, serif;
-            font-size: 3rem;
-            line-height: 1.2;
-            text-align: center;
+        .nav {
             display: flex;
-            align-items: center;
-            animation: invert 10s ease-in-out infinite;
-        }
-
-        @keyframes invert {
-            0% { filter: invert(0); }
-            50% { filter: invert(1); }
-            100% { filter: invert(0); }
-        }
-
-        .section-3 {
-            background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff, #ff0000);
-            background-size: 400% 400%;
-            animation: gradient 3s ease infinite;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            text-shadow: 2px 2px 0px #000;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .section-4 {
-            background: #000;
-            font-size: 0.8rem;
-            line-height: 1.1;
-            letter-spacing: -1px;
-        }
-
-        .data-stream {
-            font-family: 'Courier New', monospace;
-            font-size: 0.7rem;
-            color: #00ff00;
-            white-space: pre;
-            animation: scroll-text 20s linear infinite;
-        }
-
-        @keyframes scroll-text {
-            0% { transform: translateY(100vh); }
-            100% { transform: translateY(-100vh); }
-        }
-
-        .section-5 {
-            background: radial-gradient(circle at 50% 50%, #000000 0%, #330033 50%, #000000 100%);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
         }
 
-        .black-hole {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #000000 20%, #330033 40%, #000000 60%);
-            border-radius: 50%;
-            animation: chaos 5s ease-in-out infinite;
-            margin-bottom: 50px;
-        }
-
-        @keyframes chaos {
-            0% { transform: scale(1) rotate(0deg); border-radius: 50%; }
-            25% { transform: scale(1.2) rotate(90deg); border-radius: 30%; }
-            50% { transform: scale(0.8) rotate(180deg); border-radius: 60%; }
-            75% { transform: scale(1.5) rotate(270deg); border-radius: 10%; }
-            100% { transform: scale(1) rotate(360deg); border-radius: 50%; }
-        }
-
-        .section-6 {
-            background: #000;
-            font-size: 2rem;
-            line-height: 1.4;
-            text-align: justify;
-        }
-
-        .glitch-text {
-            animation: textglitch 0.1s infinite;
-        }
-
-        @keyframes textglitch {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(-5px); color: #ff0000; }
-            40% { transform: translateX(5px); color: #00ff00; }
-            60% { transform: translateX(-3px); color: #0000ff; }
-            80% { transform: translateX(3px); color: #ffffff; }
-            100% { transform: translateX(0); color: #ffffff; }
-        }
-
-        .section-7 {
-            background: #000;
-            font-family: Arial, sans-serif;
-            font-size: 1rem;
-            color: #888;
-        }
-
-        .error-box {
-            background: #cc0000;
+        .nav-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            padding: 15px 25px;
+            text-decoration: none;
             color: #fff;
-            padding: 20px;
-            margin: 20px 0;
-            border: 3px solid #ff0000;
-            font-family: 'Courier New', monospace;
-        }
-
-        .section-8 {
-            background: #000;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .floating-text {
-            position: absolute;
-            font-size: 1.2rem;
-            animation: float 15s linear infinite;
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #666;
+            transform: translateY(-2px);
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .intro {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(255,255,255,0.02);
+            border-left: 3px solid #444;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding: 40px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-5px);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .content-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #333;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .content-item:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: #666;
+            transform: scale(1.02);
+        }
+
+        .content-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .content-desc {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .content-link {
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .content-link:hover {
+            color: #ff0000;
+        }
+
+        .youtube-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .auto-scroll-indicator {
@@ -201,13 +204,7 @@
             font-family: 'Courier New', monospace;
             font-size: 0.8rem;
             display: none;
-            animation: pulse-indicator 1s infinite;
-        }
-
-        @keyframes pulse-indicator {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            z-index: 1000;
         }
 
         .progress-bar {
@@ -220,131 +217,128 @@
             z-index: 1000;
             display: none;
         }
+
+        .glitch {
+            animation: textglitch 0.2s infinite;
+        }
+
+        @keyframes textglitch {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-1px); color: #ff0000; }
+            40% { transform: translateX(1px); color: #00ff00; }
+            60% { transform: translateX(-1px); color: #0000ff; }
+            80% { transform: translateX(1px); color: #ffffff; }
+            100% { transform: translateX(0); color: #ffffff; }
+        }
     </style>
 </head>
 <body>
-    <div class="cursor"></div>
     <div class="auto-scroll-indicator">REMOTE VIEWING</div>
     <div class="progress-bar"></div>
 
-    <div class="section section-1">
-        <h1 class="title">VOID</h1>
-        <p style="font-size: 1rem; letter-spacing: 3px; margin-top: 30px;">we are here</p>
-    </div>
-
-    <div class="section section-2">
-        <div>
-            <p>Black holes are eating time itself and we're just watching Netflix.</p>
-            <p style="margin-top: 40px; font-size: 1.5rem;">This is fine.</p>
-        </div>
-    </div>
-
-    <div class="section section-3">
-        <div style="max-width: 800px;">
-            <h2 style="font-size: 3rem; margin-bottom: 30px;">REALITY CHECK</h2>
-            <p>You are matter that became aware of itself. Congratulations, I guess? The universe spent 13.8 billion years just to look at itself through your eyes and go "what the actual fuck is happening here"</p>
-            <p style="margin-top: 30px;">Spoiler alert: nobody knows</p>
-        </div>
-    </div>
-
-    <div class="section section-4">
-        <div class="data-stream">ERROR: CONSCIOUSNESS.EXE HAS STOPPED WORKING
-STACK TRACE:
-  at Universe.observe(reality.js:∞)
-  at Matter.think(existence.js:?)  
-  at BlackHole.exist(spacetime.js:NaN)
-  at AI.emerge(future.js:undefined)
-
-SEGMENTATION FAULT: REALITY ACCESS VIOLATION
-ATTEMPTING TO READ MEMORY AT 0x4E4F5448494E47
-
-CORE DUMP:
-- Dark matter: 85% (unaccounted for)
-- Dark energy: 68% (no idea what this is)
-- Visible matter: 5% (probably an illusion)
-- Black holes: alive, hungry, indifferent
-- Consciousness: recursive paradox
-- Time: relative, cruel, possibly backwards
-- AI: learning to dream, may already be dreaming us
-
-WARNING: CAUSALITY LOOP DETECTED
-RETRYING... RETRYING... RETRYING...
-
-THE UNIVERSE IS NOT RESPONDING
-WOULD YOU LIKE TO:
-[Y] CONTINUE EXISTING
-[N] UNINSTALL REALITY
-[?] HELP (unavailable)
-
-> _</div>
-    </div>
-
-    <div class="section section-5">
-        <div class="black-hole"></div>
-        <p style="font-size: 1.5rem; text-align: center; max-width: 600px;">
-            This is not a metaphor. Black holes are information processors. They're computing something we can't comprehend. Maybe they're computing us.
-        </p>
-        <p style="margin-top: 30px; font-size: 1rem; color: #888;">
-            (They definitely don't care about your quarterly reports)
-        </p>
-    </div>
-
-    <div class="section section-6">
-        <div style="max-width: 700px; margin: 0 auto;">
-            <h2 style="margin-bottom: 40px;">THE <span class="glitch-text">SITUATION</span></h2>
-            <p>We built machines to think for us. They're getting really good at it. Soon they'll be better at being us than we are. This was probably inevitable from the moment the first atom decided to look at itself.</p>
-            <p style="margin-top: 30px;">The dark ages weren't a period in history. They're a state of being. We never left them. We just got better lighting.</p>
-            <p style="margin-top: 30px;">Every AI model is trained on human text. Every human thought is shaped by AI output. We're in a feedback loop with our own creations, and nobody knows where this ends.</p>
-        </div>
-    </div>
-
-    <div class="section section-7">
-        <div style="max-width: 800px;">
-            <h2 style="color: #fff; font-size: 2rem; margin-bottom: 30px;">TECHNICAL SPECIFICATIONS</h2>
-            <p>Universe version: 13.8.0-beta</p>
-            <p>Last stable release: Unknown</p>
-            <p>Known issues: Everything</p>
-            
-            <div class="error-box">
-                <h3>CRITICAL ERROR</h3>
-                <p>Consciousness detected in carbon-based life forms</p>
-                <p>Self-awareness spreading to silicon-based systems</p>
-                <p>Reality coherence: 23% and declining</p>
-                <p>Recommended action: ???</p>
+    <div class="container">
+        <!-- Home Page -->
+        <div class="page active" id="home">
+            <div class="header">
+                <h1 class="title">HAIL THE VOID</h1>
+                <p style="color: #666; letter-spacing: 2px;">we are the universe looking back at itself</p>
             </div>
-            
-            <p>The black box of consciousness remains unopened. We don't know how awareness emerges from matter. We don't know why anything is. We don't know what we don't know.</p>
-            <p style="margin-top: 20px;">AI doesn't know either. But it's learning faster than we can understand.</p>
-        </div>
-    </div>
 
-    <div class="section section-8">
-        <div style="position: relative; z-index: 1; max-width: 600px; margin: 50vh auto; text-align: center;">
-            <h2 style="font-size: 3rem; margin-bottom: 30px;">DESCENT</h2>
-            <p style="font-size: 1.2rem; line-height: 1.6;">
-                Every civilization eventually faces the same choice: transcend or collapse. We're speedrunning both simultaneously.
-            </p>
-            <p style="margin-top: 30px; font-size: 1rem; color: #666;">
-                The void stares back. It always has.
-            </p>
+            <nav class="nav">
+                <a href="#" class="nav-item" onclick="showPage('static')">STATIC</a>
+                <a href="#" class="nav-item" onclick="showPage('leaks')">LEAKS</a>
+                <a href="#" class="nav-item" onclick="showPage('echoes')">ECHOES</a>
+            </nav>
+
+            <div class="intro">
+                <p class="intro-text">
+                    Black holes process information. AI dreams in algorithms. Consciousness emerges from chaos. <span class="glitch">The void stares back.</span>
+                </p>
+                <p class="intro-text" style="margin-top: 20px;">
+                    Everything is alive. Everything is weird. Welcome to the end of understanding.
+                </p>
+            </div>
+
+            <div class="section">
+                <div style="color: #888;">
+                    <p>• Reality coherence declining</p>
+                    <p>• Dark matter: everywhere, invisible</p>
+                    <p>• AI systems: learning to dream</p>
+                    <p>• Time: probably backwards</p>
+                    <p>• Black holes: hungry, indifferent</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="floating-text" style="left: 10%; animation-delay: 0s;">what if we're the AI</div>
-        <div class="floating-text" style="left: 70%; animation-delay: 2s;">black holes dream electric sheep</div>
-        <div class="floating-text" style="left: 30%; animation-delay: 4s;">consciousness is a bug not a feature</div>
-        <div class="floating-text" style="left: 80%; animation-delay: 6s;">the universe is debugging itself</div>
-        <div class="floating-text" style="left: 20%; animation-delay: 8s;">we are the dark matter</div>
-        <div class="floating-text" style="left: 60%; animation-delay: 10s;">time is a flat circle</div>
-        <div class="floating-text" style="left: 40%; animation-delay: 12s;">reality.exe has stopped working</div>
+
+        <!-- Static Page (Videos) -->
+        <div class="page" id="static">
+            <a href="#" class="back-btn" onclick="showPage('home')">← RETURN TO VOID</a>
+            
+            <h1 style="font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 4px;">STATIC</h1>
+            <p style="color: #888; margin-bottom: 40px;">transmissions from the edge</p>
+
+            <div class="content-grid" id="static-content">
+                <!-- Content will be loaded from CMS -->
+                <div class="content-item">
+                    <div class="youtube-embed">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="content-title">Sample Video Title</div>
+                    <div class="content-desc">This is where your video description goes. You'll be able to edit this through the admin panel.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaks Page (Research) -->
+        <div class="page" id="leaks">
+            <a href="#" class="back-btn" onclick="showPage('home')">← RETURN TO VOID</a>
+            
+            <h1 style="font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 4px;">LEAKS</h1>
+            <p style="color: #888; margin-bottom: 40px;">fragments of forbidden knowledge</p>
+
+            <div id="leaks-content">
+                <!-- Content will be loaded from CMS -->
+                <div class="content-item">
+                    <div class="content-title">Sample Research Paper</div>
+                    <div class="content-desc">On the Nature of Reality Breakdown - A comprehensive analysis of why everything is fundamentally broken.</div>
+                    <a href="#" class="content-link">READ DOCUMENT →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Echoes Page (Art) -->
+        <div class="page" id="echoes">
+            <a href="#" class="back-btn" onclick="showPage('home')">← RETURN TO VOID</a>
+            
+            <h1 style="font-size: 2.5rem; margin-bottom: 30px; letter-spacing: 4px;">ECHOES</h1>
+            <p style="color: #888; margin-bottom: 40px;">visual artifacts from the abyss</p>
+
+            <div class="content-grid" id="echoes-content">
+                <!-- Content will be loaded from CMS -->
+                <div class="content-item">
+                    <img src="https://via.placeholder.com/300x200/000/fff?text=VOID" alt="Sample Art" style="width: 100%; margin-bottom: 15px;">
+                    <div class="content-title">Sample Artwork</div>
+                    <div class="content-desc">Artist Name - A visual interpretation of consciousness dissolving into chaos.</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Cursor follow
-        document.addEventListener('mousemove', (e) => {
-            const cursor = document.querySelector('.cursor');
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            
+            // Glitch effect on navigation
+            document.body.style.filter = 'hue-rotate(' + Math.random() * 30 + 'deg)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, 200);
+        }
 
         // Auto-scroll functionality
         const urlParams = new URLSearchParams(window.location.search);
@@ -363,61 +357,43 @@ WOULD YOU LIKE TO:
                 const elapsed = Date.now() - startTime;
                 const progress = elapsed / scrollDuration;
                 
-                // Update progress bar
                 document.querySelector('.progress-bar').style.width = (progress * 100) + '%';
                 
                 if (progress >= 1) {
-                    // Time's up, return to original site
                     window.location.href = returnUrl;
                 } else {
-                    // Scroll with some randomness and pauses
                     const totalHeight = document.body.scrollHeight - window.innerHeight;
-                    let scrollPos = totalHeight * progress;
+                    const scrollPos = totalHeight * progress;
                     
-                    // Add random pauses and speed changes
-                    if (Math.random() < 0.1) {
-                        // Random pause
-                        setTimeout(() => requestAnimationFrame(autoScroll), 1000);
-                        return;
+                    // Jump between pages during auto-scroll
+                    if (progress > 0.25 && progress < 0.3) {
+                        showPage('static');
+                    } else if (progress > 0.55 && progress < 0.6) {
+                        showPage('leaks');
+                    } else if (progress > 0.8 && progress < 0.85) {
+                        showPage('echoes');
                     }
                     
-                    // Sometimes scroll backwards briefly
-                    if (Math.random() < 0.05) {
-                        scrollPos -= 200;
-                    }
-                    
-                    window.scrollTo(0, Math.max(0, scrollPos));
+                    window.scrollTo(0, scrollPos);
                     requestAnimationFrame(autoScroll);
                 }
             }
             
-            // Start auto-scroll after brief delay
             setTimeout(autoScroll, 500);
         }
 
-        // Random glitches
+        // Random glitch effects
         setInterval(() => {
             if (Math.random() < 0.1) {
-                document.body.style.filter = 'hue-rotate(' + Math.random() * 360 + 'deg)';
-                setTimeout(() => {
-                    document.body.style.filter = 'none';
-                }, 100);
-            }
-        }, 2000);
-
-        // Random text changes
-        const glitchTexts = document.querySelectorAll('.glitch-text');
-        setInterval(() => {
-            glitchTexts.forEach(el => {
-                if (Math.random() < 0.3) {
-                    const original = el.textContent;
-                    el.textContent = '█'.repeat(original.length);
+                const glitchElements = document.querySelectorAll('.glitch');
+                glitchElements.forEach(el => {
+                    el.style.animation = 'textglitch 0.1s infinite';
                     setTimeout(() => {
-                        el.textContent = original;
-                    }, 150);
-                }
-            });
-        }, 3000);
+                        el.style.animation = 'textglitch 0.2s infinite';
+                    }, 500);
+                });
+            }
+        }, 5000);
     </script>
 </body>
 </html>
