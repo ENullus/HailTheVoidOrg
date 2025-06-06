@@ -340,6 +340,174 @@
             }, 200);
         }
 
+        // Load CMS content
+        async function loadCMSContent() {
+            try {
+                await Promise.all([
+                    loadStaticContent(),
+                    loadLeaksContent(), 
+                    loadEchoesContent()
+                ]);
+            } catch (error) {
+                console.error('Error loading CMS content:', error);
+            }
+        }
+
+        async function loadStaticContent() {
+            try {
+                const response = await fetch('https://api.github.com/repos/ENullus/HailTheVoidOrg/contents/content/static');
+                const files = await response.json();
+                const container = document.getElementById('static-content');
+                
+                container.innerHTML = ''; // Clear placeholder content
+                
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const fileResponse = await fetch(file.download_url);
+                        const content = await fileResponse.text();
+                        const parsed = parseMarkdown(content);
+                        
+                        const videoId = extractYouTubeId(parsed.youtube_url);
+                        const item = createVideoItem(parsed, videoId);
+                        container.appendChild(item);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading static content:', error);
+            }
+        }
+
+        async function loadLeaksContent() {
+            try {
+                const response = await fetch('https://api.github.com/repos/ENullus/HailTheVoidOrg/contents/content/leaks');
+                const files = await response.json();
+                const container = document.getElementById('leaks-content');
+                
+                container.innerHTML = '';
+                
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const fileResponse = await fetch(file.download_url);
+                        const content = await fileResponse.text();
+                        const parsed = parseMarkdown(content);
+                        
+                        const item = createLeakItem(parsed);
+                        container.appendChild(item);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading leaks content:', error);
+            }
+        }
+
+        async function loadEchoesContent() {
+            try {
+                const response = await fetch('https://api.github.com/repos/ENullus/HailTheVoidOrg/contents/content/echoes');
+                const files = await response.json();
+                const container = document.getElementById('echoes-content');
+                
+                container.innerHTML = '';
+                
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const fileResponse = await fetch(file.download_url);
+                        const content = await fileResponse.text();
+                        const parsed = parseMarkdown(content);
+                        
+                        const item = createEchoItem(parsed);
+                        container.appendChild(item);
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading echoes content:', error);
+            }
+        }
+
+        function parseMarkdown(content) {
+            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---/;
+            const match = content.match(frontmatterRegex);
+            
+            if (!match) return {};
+            
+            const yamlContent = match[1];
+            const data = {};
+            
+            yamlContent.split('\n').forEach(line => {
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > -1) {
+                    const key = line.substring(0, colonIndex).trim();
+                    const value = line.substring(colonIndex + 1).trim();
+                    data[key] = value;
+                }
+            });
+            
+            return data;
+        }
+
+        function extractYouTubeId(url) {
+            if (!url) return null;
+            const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function createVideoItem(data, videoId) {
+            const item = document.createElement('div');
+            item.className = 'content-item';
+            
+            const embedHtml = videoId ? 
+                `<div class="youtube-embed">
+                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                </div>` : '';
+            
+            item.innerHTML = `
+                ${embedHtml}
+                <div class="content-title">${data.title || 'Untitled'}</div>
+                <div class="content-desc">${data.description || ''}</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 10px;">${formatDate(data.date)}</div>
+            `;
+            
+            return item;
+        }
+
+        function createLeakItem(data) {
+            const item = document.createElement('div');
+            item.className = 'content-item';
+            
+            item.innerHTML = `
+                <div class="content-title">${data.title || 'Untitled'}</div>
+                <div class="content-desc">${data.description || ''}</div>
+                ${data.document_url ? `<a href="${data.document_url}" class="content-link" target="_blank">READ DOCUMENT →</a>` : ''}
+                <div style="font-size: 0.8rem; color: #666; margin-top: 10px;">${formatDate(data.date)}</div>
+            `;
+            
+            return item;
+        }
+
+        function createEchoItem(data) {
+            const item = document.createElement('div');
+            item.className = 'content-item';
+            
+            item.innerHTML = `
+                ${data.image ? `<img src="${data.image}" alt="${data.title}" style="width: 100%; margin-bottom: 15px;">` : ''}
+                <div class="content-title">${data.title || 'Untitled'}</div>
+                <div class="content-desc">${data.artist ? `by ${data.artist}` : ''}</div>
+                <div class="content-desc">${data.description || ''}</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 10px;">${formatDate(data.date)}</div>
+            `;
+            
+            return item;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString();
+        }
+
+        // Load content when page loads
+        document.addEventListener('DOMContentLoaded', loadCMSContent);
+
         // Auto-scroll functionality
         const urlParams = new URLSearchParams(window.location.search);
         const isAutoPreview = urlParams.get('auto') === 'true';
