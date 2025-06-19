@@ -130,28 +130,6 @@ collections:
       - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
 
-  - name: "music"
-    label: "Static Site - Music"
-    folder: "_music"
-    create: true
-    fields:
-      - {label: "Track Title", name: "title", widget: "string"}
-      - {label: "Artist", name: "artist", widget: "string"}
-      - {label: "Album", name: "album", widget: "string", required: false}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Audio Files", name: "audio_files", widget: "list", field: {label: "Audio Track", name: "audio", widget: "file"}, required: false}
-      - {label: "Primary Audio", name: "primary_audio", widget: "file", required: false}
-      - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string", required: false}
-      - {label: "SoundCloud URL", name: "soundcloud_url", widget: "string", required: false}
-      - {label: "Spotify URL", name: "spotify_url", widget: "string", required: false}
-      - {label: "Cover Art", name: "cover_art", widget: "image", required: false}
-      - {label: "Additional Images", name: "gallery_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
-      - {label: "Genre", name: "genre", widget: "string", required: false}
-      - {label: "Duration", name: "duration", widget: "string", required: false}
-      - {label: "Show on Static Site", name: "featured_static", widget: "boolean", default: true}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-
   - name: "leaks"
     label: "Static Site - Research/Leaks"
     folder: "_leaks"
