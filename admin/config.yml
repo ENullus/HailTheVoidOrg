@@ -73,16 +73,6 @@ collections:
       - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Publish Date", name: "date", widget: "datetime"}
 
-  - name: "3d_about"
-    label: "3D Site - HAIL THE VOID (About)"
-    folder: "_3d_about"
-    create: true
-    fields:
-      - {label: "Section Title", name: "title", widget: "string"}
-      - {label: "Content", name: "content", widget: "markdown"}
-      - {label: "Background Images", name: "background_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
-      - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: true}
-      - {label: "Last Updated", name: "date", widget: "datetime"}
 
   - name: "3d_submissions"
     label: "3D Site - SHADOWS (Submissions)"
@@ -99,17 +89,6 @@ collections:
       - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: false}
       - {label: "Submission Date", name: "date", widget: "datetime"}
 
-  - name: "3d_contact"
-    label: "3D Site - COLLAPSE (Contact)"
-    folder: "_3d_contact"
-    create: true
-    fields:
-      - {label: "Message Title", name: "title", widget: "string"}
-      - {label: "Sender Name", name: "name", widget: "string"}
-      - {label: "Email", name: "email", widget: "string"}
-      - {label: "Message", name: "message", widget: "text"}
-      - {label: "Status", name: "status", widget: "select", options: ["New", "Read", "Replied", "Archived"], default: "New"}
-      - {label: "Date Received", name: "date", widget: "datetime"}
 
   # ===============================
   # STATIC SITE (CMS PORTAL) CONTENT  
