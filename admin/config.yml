@@ -1,43 +1,228 @@
+# config.yml - Separate Collections for Both Sites
 backend:
-  name: github
-  repo: ENullus/HailTheVoidOrg
+  name: git-gateway
   branch: main
-  base_url: https://sveltia-cms-auth.e-nullus.workers.dev
 
-media_folder: "static/images"
-public_folder: "/images"
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
 
 collections:
-  - name: "static"
-    label: "Static (Videos)"
-    folder: "content/static"
+  # ===============================
+  # 3D SITE (HAIL THE VOID) CONTENT
+  # ===============================
+  
+  - name: "3d_music"
+    label: "3D Site - FREQUENCIES (Music)"
+    folder: "_3d_music"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Track Title", name: "title", widget: "string"}
+      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Album", name: "album", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Audio Files", name: "audio_files", widget: "list", field: {label: "Audio Track", name: "audio", widget: "file"}, required: false, hint: "Upload multiple audio files (MP3/WAV)"}
+      - {label: "Primary Audio", name: "primary_audio", widget: "file", required: false, hint: "Main audio file for 3D site"}
+      - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string", required: false}
+      - {label: "SoundCloud URL", name: "soundcloud_url", widget: "string", required: false}
+      - {label: "Spotify URL", name: "spotify_url", widget: "string", required: false}
+      - {label: "Cover Art", name: "cover_art", widget: "image", required: false}
+      - {label: "Additional Images", name: "gallery_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Genre", name: "genre", widget: "string", required: false}
+      - {label: "Duration", name: "duration", widget: "string", required: false}
+      - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+
+  - name: "3d_art"
+    label: "3D Site - DISRUPTIONS (Art)"
+    folder: "_3d_art"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Artist Name", name: "artist", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Primary Image", name: "primary_image", widget: "image"}
+      - {label: "Gallery Images", name: "gallery_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Process Images", name: "process_images", widget: "list", field: {label: "Process Image", name: "image", widget: "image"}, required: false}
+      - {label: "Artwork Files", name: "artwork_files", widget: "list", field: {label: "File", name: "file", widget: "file"}, required: false}
+      - {label: "Medium", name: "medium", widget: "string", required: false}
+      - {label: "Dimensions", name: "dimensions", widget: "string", required: false}
+      - {label: "Year Created", name: "year", widget: "string", required: false}
+      - {label: "Artist Bio", name: "artist_info", widget: "text", required: false}
+      - {label: "Artist Website", name: "artist_website", widget: "string", required: false}
+      - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+
+  - name: "3d_videos"
+    label: "3D Site - VIDEO STREAMS"
+    folder: "_3d_videos"
+    create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "YouTube URL", name: "youtube_url", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "YouTube URL", name: "youtube_url", widget: "string", required: false}
+      - {label: "Video Files", name: "video_files", widget: "list", field: {label: "Video", name: "video", widget: "file"}, required: false}
+      - {label: "Primary Video", name: "primary_video", widget: "file", required: false, hint: "Main video for 3D site"}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+      - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+
+  - name: "3d_about"
+    label: "3D Site - HAIL THE VOID (About)"
+    folder: "_3d_about"
+    create: true
+    fields:
+      - {label: "Section Title", name: "title", widget: "string"}
+      - {label: "Content", name: "content", widget: "markdown"}
+      - {label: "Background Images", name: "background_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: true}
+      - {label: "Last Updated", name: "date", widget: "datetime"}
+
+  - name: "3d_submissions"
+    label: "3D Site - SHADOWS (Submissions)"
+    folder: "_3d_submissions"
+    create: true
+    fields:
+      - {label: "Submission Title", name: "title", widget: "string"}
+      - {label: "Submitter Name", name: "submitter", widget: "string"}
+      - {label: "Submission Type", name: "type", widget: "select", options: ["Art", "Music", "Video", "Writing", "Other"]}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Submission Files", name: "submission_files", widget: "list", field: {label: "File", name: "file", widget: "file"}, required: false}
+      - {label: "Contact Email", name: "email", widget: "string", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["Pending", "Approved", "Featured", "Rejected"], default: "Pending"}
+      - {label: "Featured on 3D Site", name: "featured_3d", widget: "boolean", default: false}
+      - {label: "Submission Date", name: "date", widget: "datetime"}
+
+  - name: "3d_contact"
+    label: "3D Site - COLLAPSE (Contact)"
+    folder: "_3d_contact"
+    create: true
+    fields:
+      - {label: "Message Title", name: "title", widget: "string"}
+      - {label: "Sender Name", name: "name", widget: "string"}
+      - {label: "Email", name: "email", widget: "string"}
+      - {label: "Message", name: "message", widget: "text"}
+      - {label: "Status", name: "status", widget: "select", options: ["New", "Read", "Replied", "Archived"], default: "New"}
+      - {label: "Date Received", name: "date", widget: "datetime"}
+
+  # ===============================
+  # STATIC SITE (CMS PORTAL) CONTENT  
+  # ===============================
+
+  - name: "static"
+    label: "Static Site - Videos"
+    folder: "_static"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "YouTube URL", name: "youtube_url", widget: "string", required: false}
+      - {label: "Video Files", name: "video_files", widget: "list", field: {label: "Video", name: "video", widget: "file"}, required: false}
+      - {label: "Primary Video", name: "primary_video", widget: "file", required: false}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+      - {label: "Show on Static Site", name: "featured_static", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+
+  - name: "music"
+    label: "Static Site - Music"
+    folder: "_music"
+    create: true
+    fields:
+      - {label: "Track Title", name: "title", widget: "string"}
+      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Album", name: "album", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Audio Files", name: "audio_files", widget: "list", field: {label: "Audio Track", name: "audio", widget: "file"}, required: false}
+      - {label: "Primary Audio", name: "primary_audio", widget: "file", required: false}
+      - {label: "Bandcamp URL", name: "bandcamp_url", widget: "string", required: false}
+      - {label: "SoundCloud URL", name: "soundcloud_url", widget: "string", required: false}
+      - {label: "Spotify URL", name: "spotify_url", widget: "string", required: false}
+      - {label: "Cover Art", name: "cover_art", widget: "image", required: false}
+      - {label: "Additional Images", name: "gallery_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Genre", name: "genre", widget: "string", required: false}
+      - {label: "Duration", name: "duration", widget: "string", required: false}
+      - {label: "Show on Static Site", name: "featured_static", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
 
   - name: "leaks"
-    label: "Leaks (Research)"
-    folder: "content/leaks"
+    label: "Static Site - Research/Leaks"
+    folder: "_leaks"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Document Link", name: "document_url", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Document Link", name: "document_url", widget: "string", required: false}
+      - {label: "Document Files", name: "document_files", widget: "list", field: {label: "Document", name: "document", widget: "file"}, required: false}
+      - {label: "Primary Document", name: "primary_document", widget: "file", required: false}
+      - {label: "Supporting Files", name: "supporting_files", widget: "list", field: {label: "File", name: "file", widget: "file"}, required: false}
+      - {label: "Author", name: "author", widget: "string", required: false}
+      - {label: "Document Type", name: "doc_type", widget: "select", options: ["Research Paper", "Report", "Analysis", "Theory", "Manifesto", "Data Leak", "Other"]}
+      - {label: "Abstract/Summary", name: "abstract", widget: "text", required: false}
+      - {label: "Show on Static Site", name: "featured_static", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
 
   - name: "echoes"
-    label: "Echoes (Art)"
-    folder: "content/echoes"
+    label: "Static Site - Art/Echoes"
+    folder: "_echoes"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
-      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Artist Name", name: "artist", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Primary Image", name: "primary_image", widget: "image"}
+      - {label: "Gallery Images", name: "gallery_images", widget: "list", field: {label: "Image", name: "image", widget: "image"}, required: false}
+      - {label: "Process Images", name: "process_images", widget: "list", field: {label: "Process Image", name: "image", widget: "image"}, required: false}
+      - {label: "Artwork Files", name: "artwork_files", widget: "list", field: {label: "File", name: "file", widget: "file"}, required: false}
+      - {label: "Medium", name: "medium", widget: "string", required: false}
+      - {label: "Dimensions", name: "dimensions", widget: "string", required: false}
+      - {label: "Year Created", name: "year", widget: "string", required: false}
+      - {label: "Artist Bio", name: "artist_info", widget: "text", required: false}
+      - {label: "Artist Website", name: "artist_website", widget: "string", required: false}
+      - {label: "Show on Static Site", name: "featured_static", widget: "boolean", default: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+
+  # ===============================
+  # SHARED SITE SETTINGS
+  # ===============================
+
+  - name: "pages"
+    label: "Site Settings & Pages"
+    files:
+      - label: "3D Site Settings"
+        name: "3d_settings"
+        file: "_data/3d_settings.yml"
+        fields:
+          - {label: "3D Site Title", name: "site_title", widget: "string", default: "HAIL THE VOID"}
+          - {label: "3D Site Description", name: "site_description", widget: "text"}
+          - {label: "3D Site URL", name: "site_url", widget: "string", required: false}
+          - {label: "Contact Email", name: "contact_email", widget: "string"}
+          - {label: "Logo Files", name: "logo_files", widget: "list", field: {label: "Logo", name: "logo", widget: "image"}, required: false}
+          - {label: "Social Links", name: "social", widget: "object", fields: [
+              {label: "Instagram", name: "instagram", widget: "string", required: false},
+              {label: "Twitter/X", name: "twitter", widget: "string", required: false},
+              {label: "Bandcamp", name: "bandcamp", widget: "string", required: false},
+              {label: "SoundCloud", name: "soundcloud", widget: "string", required: false},
+              {label: "YouTube", name: "youtube", widget: "string", required: false}
+            ]}
+
+      - label: "Static Site Settings"
+        name: "static_settings"
+        file: "_data/static_settings.yml"
+        fields:
+          - {label: "Static Site Title", name: "site_title", widget: "string", default: "HAIL THE VOID - Portal"}
+          - {label: "Static Site Description", name: "site_description", widget: "text"}
+          - {label: "Static Site URL", name: "site_url", widget: "string", required: false}
+          - {label: "Contact Email", name: "contact_email", widget: "string"}
+          - {label: "Cross-link to 3D Site", name: "link_to_3d", widget: "string", required: false, hint: "URL to link back to 3D site"}
+          - {label: "Background Images", name: "background_images", widget: "list", field: {label: "Background", name: "background", widget: "image"}, required: false}
+
+# File size and upload limits
+media_library:
+  max_file_size: 512000000 # 512MB max file size
+  media_folder: "/assets/uploads"
