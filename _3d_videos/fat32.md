@@ -4,7 +4,7 @@ description: |-
   Outside is chaos
   But inside?
   It's all the same
-youtube_url: https://youtu.be/wKZtlRcXF0Y?si=DVhH8yauI0FlgcvF
+youtube_url: https://www.youtube.com/embed/wKZtlRcXF0Y
 video_files: []
 primary_video: ''
 thumbnail: ''
