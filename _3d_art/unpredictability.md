@@ -1,8 +1,8 @@
 ---
-title: UNPREDICTABILITY
+title: The Relic
 artist: Erebus Nullus
-description: Praises from the other side
-primary_image: https://res.cloudinary.com/do7mfbhhl/image/upload/v1750915850/u5475182982_Reality_tearing_at_its_seams_-_outer_edges_buzzin_b3841111-21c2-4c70-8b03-944234f73ed2_0_v9bywf.png
+description: Human are in  constant state of remembering. We routinely forget the connection between our stomachs and our minds like so amazingly depicted in this ancient relic. You remember this right? The symbol we made to remind ourselves. Then they made other symbols. But none of them included the 2 cores that make us tick. They forgot the cores smh.
+primary_image: https://res.cloudinary.com/do7mfbhhl/image/upload/v1750915849/relic_ucbacm.png
 gallery_images: []
 process_images: []
 artwork_files: []
