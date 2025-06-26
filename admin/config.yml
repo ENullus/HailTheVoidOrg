@@ -7,8 +7,8 @@ backend:
   app_id: Ov23liX9sTkTLp4IExSx
   base_url: https://sveltia-cms-auth.e-nullus.workers.dev
 
-media_folder: "static/images"   # Netlify CMS will store images here in your repo
-public_folder: "/static/images" # Your website will look for images at this URL
+media_folder: "static/images"
+public_folder: "/images"
 
 collections:
   # ===============================
