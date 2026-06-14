@@ -259,9 +259,31 @@
             80% { transform: translateX(1px); color: #ffffff; }
             100% { transform: translateX(0); color: #ffffff; }
         }
+
+        .site-link {
+            position: fixed;
+            top: 18px;
+            right: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: #666;
+            text-decoration: none;
+            z-index: 9999;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid #333;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .site-link:hover {
+            color: #fff;
+            border-color: #666;
+        }
     </style>
 </head>
 <body>
+    <a href="https://hailthevoid.org" class="site-link">HAILTHEVOID.ORG</a>
+
     <div class="auto-scroll-indicator">REMOTE VIEWING</div>
     <div class="progress-bar"></div>
 
@@ -604,48 +626,6 @@
             loadLeaksContent();
             loadEchoesContent();
         });
-
-        // Auto-scroll functionality (for 3D site preview)
-        const urlParams = new URLSearchParams(window.location.search);
-        const isAutoPreview = urlParams.get('auto') === 'true';
-        const duration = parseInt(urlParams.get('duration')) || 15;
-        const returnUrl = urlParams.get('return');
-
-        if (isAutoPreview && returnUrl) {
-            document.querySelector('.auto-scroll-indicator').style.display = 'block';
-            document.querySelector('.progress-bar').style.display = 'block';
-            
-            const startTime = Date.now();
-            const scrollDuration = duration * 1000;
-            
-            function autoScroll() {
-                const elapsed = Date.now() - startTime;
-                const progress = elapsed / scrollDuration;
-                
-                document.querySelector('.progress-bar').style.width = (progress * 100) + '%';
-                
-                if (progress >= 1) {
-                    window.location.href = returnUrl;
-                } else {
-                    const totalHeight = document.body.scrollHeight - window.innerHeight;
-                    const scrollPos = totalHeight * progress;
-                    
-                    // Jump between pages during auto-scroll
-                    if (progress > 0.25 && progress < 0.3) {
-                        showPage('static');
-                    } else if (progress > 0.55 && progress < 0.6) {
-                        showPage('leaks');
-                    } else if (progress > 0.8 && progress < 0.85) {
-                        showPage('echoes');
-                    }
-                    
-                    window.scrollTo(0, scrollPos);
-                    requestAnimationFrame(autoScroll);
-                }
-            }
-            
-            setTimeout(autoScroll, 500);
-        }
 
         // Random glitch effects
         setInterval(() => {
